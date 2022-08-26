@@ -220,7 +220,7 @@ saveRDS(nmdsl, 'Table/02_Prediction_NMDS.rds')
 data <- readRDS('Table/02_Prediction_NMDS.rds')
 
 glist <- c()
-for(i in names(dlist)[-7]){#i=names(dlist)[1]
+for(i in names(dlist)[-7]){#i=names(dlist)[2]
     
     sub <- data[data$treat1==i, ]
     
@@ -238,9 +238,11 @@ for(i in names(dlist)[-7]){#i=names(dlist)[1]
                 coord_fixed(ratio=diff(range(sub$MDS1))/diff(range(sub$MDS2)))+
                 labs(title=i, x='Axis 1', y='Axis 2', fill='Time step\nfrom maximal change')+
                 facet_wrap(~tp)
+                
     glist[[i]] <- nmdsg1
 }
 
-
 ggsave(plot=plot_grid(plotlist=glist), 
-       filename=sprintf('%s/nmds_relative.tiff', dir$figdir), w=23, h=10)
+       filename=sprintf('%s/nmds_relative.pdf', dir$figdir), w=23, h=10)
+       
+
